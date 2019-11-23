@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+	<div id="header"></div>
+
+	<form id="box_incluir" style="display: none;">
+		<h1>Dados Cadastrais</h1>
+		<hr>
+		<div id="fileira1">
+			<div>
+				<label class="obrigatorio" for="descricao">Descrição</label>
+				<input id="descricao" type="text" name="descricao" />
+			</div>
+			<div>
+				<label class="obrigatorio" for="placa">Placa</label>
+				<input id="placa" type="text" name="placa""/>
+			</div>
+			<div>
+				<label for="renavam">Codigo RENAVAM</label>
+				<input id="renavam" type="text" name="renavam" maxlength="11" />
+			</div>
+		</div>
+
+		<div id="fileira2">
+			<div>
+				<label>Ano modelo</label>
+				<select id="ano_modelo"></select>
+			</div>
+			<div>
+				<label>Ano fabricação</label>
+				<select id="ano_fabricacao"></select>
+			</div>
+			<div>
+				<label for="cor">Cor</label>
+				<input id="cor" type="text" name="cor"/>
+			</div>
+			<div>
+				<label for="km">Km</label>
+				<input id="km" type="text" name="km" maxlength="6" />
+			</div>
+			<div>
+				<label>Marca</label>
+				<select id="marca"></select>
+			</div>
+		</div>
+
+		<div id="fileira3">
+			<div>
+				<label for="preco">Preço</label>
+				<input id="preco" type="text" name="preco"/>
+			</div>
+			<div>
+				<label for="preco_fipe">Preço fipe</label>
+				<input id="preco_fipe" type="text" name="preco_fipe"/>
+			</div>
+		</div>
+
+		<div>
+			<input id="salvar" type="button" name="salvar" value="Salvar">
+			<input class="cancelar" type="button" name="cancelar" value="Cancelar">
+		</div>
+	</form>
+
+	<div id="box" style="display: none;">
+		<h1>Automóveis</h1>
+		<hr>
+		<table id="tabela_automoveis">
+			<thead>
+				<tr>
+					<th style="width: 20px; margin-left: 8px;"><input type="checkbox" name=""></th>
+					<th>Descrição</th>
+					<th>Placa</th>
+					<th>Marca</th>
+				</tr>
+			</thead>
+
+			<tbody></tbody>
+		</table>
+		<div id="paginacao">
+			<a class="block_anterior" id="anterior" href=""><label for="Anterior"><i class="fas fa-angle-left"></i>Anterior</label></a>
+			<a id="proximo" href=""><label for="Proximo">Proximo<i class="fas fa-angle-right"></i></label></a>
+		</div>
+	</div>
+
+	<div id="box_sucesso" style="display: none;">
+		<span>Automóvel salvo com sucesso</span>
+	</div>
+
+	<div id="box_excluir" style="display: none;">
+		<span>Exclusão efetuada com sucesso</span>
+	</div>
+
+	<div id="coluna_acoes" >
+		<input id="incluir_pedido" type="button" name="incluir" value="Incluir"> </input>
+		<div id="coluna_acoes_lista">
+			<nav>
+				<ul><i class="fas fa-trash-alt"></i><a href="#" class="acao"  id="excluir">Excluir</a></ul>
+			</nav>
+			</div>
+		</div>	
+	</div>
+	<div id="footer"></div>
+</body>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="../js/home.js" type="text/javascript"></script>
+<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+</html>
