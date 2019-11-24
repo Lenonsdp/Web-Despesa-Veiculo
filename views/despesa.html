@@ -11,6 +11,12 @@
 	<div id="box" style="">
 		<h1>Despesas</h1>
 		<hr>
+		<div>
+			<label for="dataIni">Data inicial</label>
+				<input type="date" id="dataIni">				
+			<label for="dataFim">Data final</label>
+			<input type="date" id="dataFim">
+		</div>
 		<table id="tabela_despesa">
 			<thead>
 				<tr>
@@ -23,10 +29,10 @@
 
 			<tbody></tbody>
 		</table>
-		<div id="paginacao">
+		<!-- <div id="paginacao">
 			<a class="block_anterior" id="anterior" href=""><label for="Anterior"><i class="fas fa-angle-left"></i>Anterior</label></a>
 			<a id="proximo" href=""><label for="Proximo">Proximo<i class="fas fa-angle-right"></i></label></a>
-		</div>
+		</div> -->
 	</div>
 
 	<form id="box_incluirDespesa" style="display: none;">
@@ -76,9 +82,7 @@
 			<nav>
 				<ul><i class="fas fa-trash-alt"></i><a href="#" class="acao"  id="excluir">Excluir</a></ul>
 			</nav>
-		</div>	
-		<input readonly=“true” id="valorTotal" type="text" value="0,00"> </input>			
-		
+		</div>			
 	</div>
 	<div id="footer"></div>
 </body>
