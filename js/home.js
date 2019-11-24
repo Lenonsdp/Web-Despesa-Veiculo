@@ -18,17 +18,12 @@ $(function() {
 		$('#box').show(); 
 		listar();
 	}
-
-	// $('#preco, #preco_fipe, #preco_de, #preco_ate').inputmask('currency', {'autoUnmask': true,
-	// 	'radixPoint': ',',
-	// 	'groupSeparator': '.',
-	// 	'allowMinus': false,
-	// 	'prefix': '',         
-	// 	'digits': 2,
-	// 	'digitsOptional': false,
-	// 	'rightAlign': true,
-	// 	'unmaskAsNumber': true
-	// });
+	$(document).ready(function() {
+		$('#data').mask('00/00/0000');
+		$('#preco').mask("#.##0,00", {reverse: true});
+		$('#preco_fipe').mask("#.##0,00", {reverse: true});
+		$('#placa').mask('AAA-0000');
+	});
 });
 
 function vincularEventos() {
@@ -114,8 +109,8 @@ function vincularEventos() {
 				"cor": $("#cor").val(),
 				"km": $("#km").val(),
 				"marca": $("#marca").val(),
-				"preco": $("#preco").val(),
-				"preco_fipe": $("#preco_fipe").val(),
+				"preco": parseFloat($("#preco").val()),
+				"preco_fipe": parseFloat($("#preco_fipe").val()),
 				"idUser": window.localStorage.getItem('usuario')
 			}
 			if (idAutomovel) {

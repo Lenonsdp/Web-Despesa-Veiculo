@@ -13,6 +13,11 @@ $(function() {
 		$('#box').show(); 
 		listar();
 	}
+
+	$(document).ready(function() {
+		 $('#data').mask('00/00/0000');
+		 $('#valor').mask("#.##0,00", {reverse: true});
+	});
 });
 
 function vincularEventos() {
