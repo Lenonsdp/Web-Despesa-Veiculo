@@ -16,7 +16,6 @@ $(function() {
 
 	$(document).ready(function() {
 		 $('#data').mask('00/00/0000');
-		 $('#valor').mask("#.##0,00", {reverse: true});
 	});
 });
 
@@ -67,6 +66,15 @@ function vincularEventos() {
 		}
 	});
 
+	$('#tipo').on('change', function() {
+		$('#km').empty();
+		if ($('#tipo').val() == 'GASOLINA' || $('#tipo').val() == 'MECANICA') {
+			$('#kmDiv').show();
+		} else {
+			$('#kmDiv').hide();
+		}
+	});
+
 	$('#incluir_despesa').on('click', function() {
 		$('#box_incluirDespesa').each(function() {
 			this.reset();
@@ -75,6 +83,7 @@ function vincularEventos() {
 		if ($('#veiculo_despesa').val() == '') {
 			alert('Selecione um veiculo para lançar uma despesa');
 		} else {
+			verificarKm();
 			$('#box').hide();
 			$('#box_incluirDespesa').show();
 			var d = new Date();
@@ -89,13 +98,14 @@ function vincularEventos() {
 		$(camposObrigatorios.join(', ')).parent().removeClass('warning');
 		if ($('#valor').val().trim() != '' && $('#data').val() != '') {
 			var valor = $("#valor").val();
-			valor = valor.toString().replace('R$', '');
+			valor = valor.replace(",",".");
 			var json = {
-				"valor": parseFloat(valor),
+				"valor": valor,
 				"data": formatDate($("#data").val()),
 				"observacoes": $("#observacoes").val(),
 				"tipo": $("#tipo").val(),
-				"idCarro": parseInt($('#veiculo_despesa').val())
+				"idCarro": parseInt($('#veiculo_despesa').val()),
+				"km": $('#km').val()
 			}
 			if (idDespesa) {
 				$.ajax({
@@ -204,6 +214,14 @@ function vincularEventos() {
 	});
 }
 
+function verificarKm() {
+	$('#km').empty();
+	if ($('#tipo').val() == 'GASOLINA' || $('#tipo').val() == 'MECANICA') {
+		$('#kmDiv').show();
+	} else {
+		$('#kmDiv').hide();
+	}
+}
 function listar() {
 	var dataIni = formatDate($('#dataIni').val());
 	var dataFim = formatDate($('#dataFim').val()); 		
@@ -258,7 +276,8 @@ function mostrarDadosTabela(despesas) {
 				),
 				$('<td>', {'text': formatDate(despesas.data, 'pt-br')}),
 				$('<td>', {'text': despesas.tipo}),
-				$('<td>', {'text': despesas.valor.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"})})
+				$('<td>', {'text': despesas.valor.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"})}),
+				$('<td>', {'text': despesas.km})
 			)
 		)                      
 	});
@@ -266,6 +285,7 @@ function mostrarDadosTabela(despesas) {
 	$('#tabela_despesa tbody').append(
 		$('<tr>').append(
 			$('<th>', {'text': 'Total'}),
+			$('<th>'),
 			$('<th>'),
 			$('<th>'),
 			$('<th>', {'text': totalDespesa.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"})})
@@ -294,11 +314,13 @@ function obterDadosDespesa(idDespesa) {
 			'Access-Control-Allow-Origin': '*' 
 		},
 		url: 'https://apirestdev.herokuapp.com/api/despesa/' + idDespesa,
-		success: function(despesa) {
+		success: function(despesa) {	
 			$('#tipo').val(despesa.tipo);
 			$('#observacoes').val(despesa.observacoes);
 			$('#data').val(formatDate(despesa.data, 'pt-br'));
-			$('#valor').val(despesa.valor.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}));
+			$('#valor').val(despesa.valor);
+			$('#km').val(despesa.km);
+			verificarKm();
 		}
 	});
 }

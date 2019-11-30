@@ -20,8 +20,6 @@ $(function() {
 	}
 	$(document).ready(function() {
 		$('#data').mask('00/00/0000');
-		$('#preco').mask("#.##0,00", {reverse: true});
-		$('#preco_fipe').mask("#.##0,00", {reverse: true});
 		$('#placa').mask('AAA-0000');
 	});
 });
@@ -100,17 +98,17 @@ function vincularEventos() {
 			$('input:checkbox:checked').each(function() {
 				listaAcessorios.push($(this).val());
 			});
+			var preco = $('#preco').val();
+			preco = preco.replace(",",".");
 			var json = {
 				"descricao": $("#descricao").val(),
 				"placa": $("#placa").val(),
 				"renavam": $("#renavam").val(),
 				"anoModelo": $("#ano_modelo").val(),
-				"anoFabricacao": $("#ano_fabricacao").val(),
 				"cor": $("#cor").val(),
 				"km": $("#km").val(),
 				"marca": $("#marca").val(),
-				"preco": parseFloat($("#preco").val()),
-				"preco_fipe": parseFloat($("#preco_fipe").val()),
+				"preco": preco,
 				"idUser": window.localStorage.getItem('usuario')
 			}
 			if (idAutomovel) {
@@ -324,12 +322,10 @@ function obterDadosAutomovel(idAutomovel) {
 			$('#placa').val(automovel.placa);
 			$('#renavam').val(automovel.renavam);
 			$('#ano_modelo').val(automovel.anoModelo);
-			$('#ano_fabricacao').val(automovel.anoFabricacao); //camelcase
 			$('#cor').val(automovel.cor);
 			$('#km').val(automovel.km);
 			$('#marca').val(automovel.marca);
-			$('#preco').val(automovel.preco.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}));
-			$('#preco_fipe').val(automovel.preco_fipe.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}));
+			$('#preco').val(automovel.preco);
 		}
 	});
 }

@@ -24,6 +24,7 @@
 					<th>Data</th>
 					<th>Tipo</th>
 					<th>Valor</th>
+					<th>Km</th>
 				</tr>
 			</thead>
 
@@ -46,17 +47,21 @@
 			<div>
 				<label for="tipo">Tipo Despesa</label>
 				<select id="tipo" type="text" name="tipo">
+					<option value="OUTRAS">Outras despesas</option>
 					<option value="GASOLINA">Gasolina</option>
 					<option value="LAVAGEM">Lavagem</option>
 					<option value="SEGURO">Seguro</option>
 					<option value="MECANICA">Mecanica</option>
 					<option value="IMPOSTOS">Impostos</option>
-					<option value="OUTRAS">Outras despesas</option>
 				</select>
 			</div>
 			<div>
 				<label class="obrigatorio" for="valor">Valor</label>
 				<input id="valor" type="text" name="valor"/>
+			</div>
+			<div id="kmDiv" style="display: none;">
+				<label for="km">Km</label>
+				<input id="km" type="text" name="km"/>
 			</div>
 		</div>
 
